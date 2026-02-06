@@ -1,0 +1,8 @@
+{
+  "extName": {
+    "message": "AI Trade Journal — AI交易日志"
+  },
+  "extDescription": {
+    "message": "AI驱动的交易复盘工具。粘贴交易记录，自动解析并生成专业分析，一键同步到Notion。"
+  }
+}

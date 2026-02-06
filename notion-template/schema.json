@@ -1,0 +1,115 @@
+{
+  "database_title": "AI Trading Journal",
+  "description": "AI-powered trading journal with automated trade parsing and analysis",
+  "properties": {
+    "Symbol": {
+      "type": "title",
+      "description": "Ticker symbol (e.g., NVDA, AAPL)"
+    },
+    "Trade Date": {
+      "type": "date",
+      "description": "Trade execution datetime"
+    },
+    "Action": {
+      "type": "select",
+      "options": [
+        { "name": "Buy", "color": "green" },
+        { "name": "Sell", "color": "red" },
+        { "name": "Short", "color": "orange" },
+        { "name": "Cover", "color": "blue" }
+      ]
+    },
+    "Quantity": {
+      "type": "number",
+      "format": "number",
+      "description": "Number of shares/contracts"
+    },
+    "Entry Price": {
+      "type": "number",
+      "format": "dollar",
+      "description": "Entry price per share"
+    },
+    "Exit Price": {
+      "type": "number",
+      "format": "dollar",
+      "description": "Exit price per share (if closed)"
+    },
+    "P/L": {
+      "type": "formula",
+      "expression": "if(prop(\"Exit Price\") > 0, multiply(subtract(prop(\"Exit Price\"), prop(\"Entry Price\")), prop(\"Quantity\")), 0)",
+      "description": "Calculated profit/loss"
+    },
+    "P/L %": {
+      "type": "formula",
+      "expression": "if(and(prop(\"Entry Price\") > 0, prop(\"Exit Price\") > 0), round(multiply(divide(subtract(prop(\"Exit Price\"), prop(\"Entry Price\")), prop(\"Entry Price\")), 100) * 100) / 100, 0)",
+      "description": "Percentage return"
+    },
+    "R-Multiple": {
+      "type": "number",
+      "format": "number",
+      "description": "Risk-reward ratio"
+    },
+    "Commission": {
+      "type": "number",
+      "format": "dollar",
+      "description": "Trading fees"
+    },
+    "Setup Type": {
+      "type": "select",
+      "options": [
+        { "name": "Breakout", "color": "blue" },
+        { "name": "Pullback", "color": "purple" },
+        { "name": "Range", "color": "yellow" },
+        { "name": "Momentum", "color": "green" },
+        { "name": "Other", "color": "gray" }
+      ]
+    },
+    "Emotion Tag": {
+      "type": "multi_select",
+      "options": [
+        { "name": "Disciplined", "color": "green" },
+        { "name": "FOMO", "color": "red" },
+        { "name": "Revenge", "color": "orange" },
+        { "name": "Overconfident", "color": "yellow" },
+        { "name": "Fear", "color": "purple" }
+      ]
+    },
+    "AI Analysis": {
+      "type": "rich_text",
+      "description": "AI-generated trade review"
+    },
+    "AI Score": {
+      "type": "number",
+      "format": "number",
+      "description": "0-100 quality score from AI analysis"
+    },
+    "Notes": {
+      "type": "rich_text",
+      "description": "User's own notes"
+    },
+    "Screenshot": {
+      "type": "files",
+      "description": "Chart screenshots (optional)"
+    },
+    "Broker": {
+      "type": "select",
+      "options": [
+        { "name": "Futu", "color": "orange" },
+        { "name": "IBKR", "color": "red" },
+        { "name": "Webull", "color": "green" },
+        { "name": "Schwab", "color": "blue" },
+        { "name": "Tiger", "color": "yellow" },
+        { "name": "Longbridge", "color": "purple" },
+        { "name": "Other", "color": "gray" }
+      ]
+    },
+    "Sync Status": {
+      "type": "select",
+      "options": [
+        { "name": "Synced", "color": "green" },
+        { "name": "Pending", "color": "yellow" },
+        { "name": "Error", "color": "red" }
+      ]
+    }
+  }
+}

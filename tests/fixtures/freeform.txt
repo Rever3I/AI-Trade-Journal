@@ -1,0 +1,6 @@
+bought 100 NVDA at 135.50 at 9:35am
+sold 100 NVDA at 142.30 at 2:15pm
+bought 50 AAPL @ 189.20
+sold 50 AAPL @ 191.50
+shorted 200 TSLA 215.30
+covered 200 TSLA at 210.80
