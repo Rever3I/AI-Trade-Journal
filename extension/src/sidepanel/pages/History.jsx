@@ -25,29 +25,54 @@ export function History({ syncs }) {
     return date.toLocaleString();
   }
 
+  function statusBadge(sync) {
+    if (sync.status === 'success') {
+      return { class: 'bg-profit/10 text-profit', text: '✓' };
+    }
+    if (sync.status === 'partial') {
+      return { class: 'bg-yellow-500/10 text-yellow-400', text: t('historyPartialSync') };
+    }
+    return { class: 'bg-loss/10 text-loss', text: '✗' };
+  }
+
   return (
     <div class="flex flex-col gap-2">
-      {syncs.map((sync, index) => (
-        <div key={index} class="card flex items-center justify-between">
-          <div class="flex flex-col">
-            <span class="text-sm text-text-primary font-medium">
-              {t('historyTradeCount', [String(sync.tradeCount)])}
-            </span>
-            <span class="text-xs text-text-muted">
-              {formatDate(sync.timestamp)}
-            </span>
+      {syncs.map((sync, index) => {
+        const badge = statusBadge(sync);
+        return (
+          <div key={index} class="card flex flex-col gap-2">
+            <div class="flex items-center justify-between">
+              <div class="flex flex-col">
+                <span class="text-sm text-text-primary font-medium">
+                  {t('historyTradeCount', [String(sync.tradeCount)])}
+                </span>
+                <span class="text-xs text-text-muted">
+                  {formatDate(sync.timestamp)}
+                </span>
+              </div>
+              <span class={`text-xs px-2 py-1 rounded-full ${badge.class}`}>
+                {badge.text}
+              </span>
+            </div>
+
+            {sync.errorCount > 0 && (
+              <div class="text-xs text-loss">
+                {t('syncResultErrors', [String(sync.errorCount)])}
+              </div>
+            )}
+
+            {sync.results && sync.results.length > 0 && (
+              <div class="flex flex-wrap gap-1">
+                {sync.results.slice(0, 8).map((r, i) => (
+                  <span key={i} class="text-xs text-text-muted bg-surface-raised px-1.5 py-0.5 rounded">
+                    {r.symbol}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
-          <span
-            class={`text-xs px-2 py-1 rounded-full ${
-              sync.status === 'success'
-                ? 'bg-profit/10 text-profit'
-                : 'bg-loss/10 text-loss'
-            }`}
-          >
-            {sync.status === 'success' ? '✓' : '✗'}
-          </span>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

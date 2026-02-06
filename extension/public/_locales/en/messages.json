@@ -196,7 +196,153 @@
     "description": "Risk assessment template"
   },
   "analysisNoTrades": {
-    "message": "Please sync trade records before running analysis",
+    "message": "Parse trades in Smart Paste first",
     "description": "No trades for analysis"
+  },
+  "analysisRunButton": {
+    "message": "Run Analysis",
+    "description": "Run analysis button"
+  },
+  "analysisLoading": {
+    "message": "AI Analyzing...",
+    "description": "Analysis loading text"
+  },
+  "analysisComplete": {
+    "message": "Analysis Complete",
+    "description": "Analysis complete title"
+  },
+  "analysisScore": {
+    "message": "Score",
+    "description": "Analysis score label"
+  },
+  "analysisSaveToNotion": {
+    "message": "Save to Notion",
+    "description": "Save analysis to Notion button"
+  },
+  "analysisSaved": {
+    "message": "Saved to Notion",
+    "description": "Analysis saved confirmation"
+  },
+  "analysisSaveFailed": {
+    "message": "Save failed, please try again",
+    "description": "Analysis save failed"
+  },
+  "analysisError": {
+    "message": "Analysis failed, please try again later",
+    "description": "Analysis error message"
+  },
+  "analysisTradeCount": {
+    "message": "$count$ trades",
+    "description": "Trade count for analysis",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "analysisInsights": {
+    "message": "Insights",
+    "description": "Insights section title"
+  },
+  "analysisActionItems": {
+    "message": "Action Items",
+    "description": "Action items section title"
+  },
+  "analysisMetrics": {
+    "message": "Key Metrics",
+    "description": "Metrics section title"
+  },
+  "analysisWinRate": {
+    "message": "Win Rate",
+    "description": "Win rate metric"
+  },
+  "analysisProfitFactor": {
+    "message": "Profit Factor",
+    "description": "Profit factor metric"
+  },
+  "analysisTotalPnl": {
+    "message": "Total P/L",
+    "description": "Total P/L metric"
+  },
+  "settingsSetupDatabase": {
+    "message": "Set Up Notion Database",
+    "description": "Set up Notion database button"
+  },
+  "settingsDatabaseReady": {
+    "message": "Notion Database Ready",
+    "description": "Database configured status"
+  },
+  "settingsCheckingStatus": {
+    "message": "Checking status...",
+    "description": "Checking Notion status"
+  },
+  "settingsSetupComplete": {
+    "message": "Database created successfully!",
+    "description": "Database setup success"
+  },
+  "settingsSetupFailed": {
+    "message": "Database setup failed, please try again",
+    "description": "Database setup failed"
+  },
+  "settingsSetupLoading": {
+    "message": "Creating...",
+    "description": "Database setup loading"
+  },
+  "settingsWorkspace": {
+    "message": "Workspace",
+    "description": "Workspace label"
+  },
+  "settingsLicenseRequired": {
+    "message": "Please activate your license first",
+    "description": "License required message"
+  },
+  "insightCritical": {
+    "message": "Critical",
+    "description": "Critical severity label"
+  },
+  "insightWarning": {
+    "message": "Warning",
+    "description": "Warning severity label"
+  },
+  "insightInfo": {
+    "message": "Info",
+    "description": "Info severity label"
+  },
+  "historyViewInNotion": {
+    "message": "View in Notion",
+    "description": "View in Notion link"
+  },
+  "historyPartialSync": {
+    "message": "Partial",
+    "description": "Partial sync status"
+  },
+  "rateLimitDaily": {
+    "message": "Daily free analyses used up, resets tomorrow",
+    "description": "Daily rate limit message"
+  },
+  "rateLimitMonthly": {
+    "message": "Monthly analysis limit reached",
+    "description": "Monthly rate limit message"
+  },
+  "syncResultSynced": {
+    "message": "$count$ synced",
+    "description": "Sync result count",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "syncResultErrors": {
+    "message": "$count$ failed",
+    "description": "Sync error count",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
   }
 }

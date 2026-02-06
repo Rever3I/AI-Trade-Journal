@@ -1,0 +1,9 @@
+Today I made a few trades:
+
+Bought 100 shares of NVDA at $135.50 around 9:35am
+Sold 50 shares of TSLA at $248.20 at 10:15am
+Shorted 200 shares of AAPL at $189.75 at 11:00am
+Covered my AAPL short at $188.50 at 2:30pm
+
+Also bought 75 shares of MSFT at $402.10 in the afternoon.
+Commission was $0 on all trades (Webull).

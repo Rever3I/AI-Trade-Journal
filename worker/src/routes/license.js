@@ -14,7 +14,7 @@ import { jsonResponse } from '../index.js';
  */
 export async function handleLicenseRoutes(request, env, path) {
   if (request.method !== 'POST') {
-    return jsonResponse({ error: 'METHOD_NOT_ALLOWED' }, 405);
+    return jsonResponse({ error: 'METHOD_NOT_ALLOWED' }, 405, env);
   }
 
   switch (path) {
@@ -25,7 +25,7 @@ export async function handleLicenseRoutes(request, env, path) {
       return handleActivate(request, env);
 
     default:
-      return jsonResponse({ error: 'NOT_FOUND' }, 404);
+      return jsonResponse({ error: 'NOT_FOUND' }, 404, env);
   }
 }
 
@@ -40,12 +40,12 @@ async function handleValidate(request, env) {
   try {
     body = await request.json();
   } catch {
-    return jsonResponse({ error: 'INVALID_JSON' }, 400);
+    return jsonResponse({ error: 'INVALID_JSON' }, 400, env);
   }
 
   const key = body.key;
   if (!key || typeof key !== 'string' || key.length !== 16) {
-    return jsonResponse({ error: 'INVALID_KEY_FORMAT', valid: false }, 400);
+    return jsonResponse({ error: 'INVALID_KEY_FORMAT', valid: false }, 400, env);
   }
 
   try {
@@ -54,20 +54,20 @@ async function handleValidate(request, env) {
     ).bind(key).first();
 
     if (!result) {
-      return jsonResponse({ valid: false, error: 'KEY_NOT_FOUND' });
+      return jsonResponse({ valid: false, error: 'KEY_NOT_FOUND' }, 200, env);
     }
 
     if (result.status === 'revoked') {
-      return jsonResponse({ valid: false, error: 'KEY_REVOKED' });
+      return jsonResponse({ valid: false, error: 'KEY_REVOKED' }, 200, env);
     }
 
     return jsonResponse({
       valid: true,
       status: result.status,
       activated_at: result.activated_at,
-    });
+    }, 200, env);
   } catch {
-    return jsonResponse({ error: 'VALIDATION_FAILED' }, 500);
+    return jsonResponse({ error: 'VALIDATION_FAILED' }, 500, env);
   }
 }
 
@@ -82,13 +82,13 @@ async function handleActivate(request, env) {
   try {
     body = await request.json();
   } catch {
-    return jsonResponse({ error: 'INVALID_JSON' }, 400);
+    return jsonResponse({ error: 'INVALID_JSON' }, 400, env);
   }
 
   const { key, notion_user_id: notionUserId } = body;
 
   if (!key || typeof key !== 'string' || key.length !== 16) {
-    return jsonResponse({ error: 'INVALID_KEY_FORMAT' }, 400);
+    return jsonResponse({ error: 'INVALID_KEY_FORMAT' }, 400, env);
   }
 
   try {
@@ -97,15 +97,15 @@ async function handleActivate(request, env) {
     ).bind(key).first();
 
     if (!existing) {
-      return jsonResponse({ error: 'KEY_NOT_FOUND' }, 404);
+      return jsonResponse({ error: 'KEY_NOT_FOUND' }, 404, env);
     }
 
     if (existing.status === 'active') {
-      return jsonResponse({ error: 'KEY_ALREADY_ACTIVE' }, 409);
+      return jsonResponse({ error: 'KEY_ALREADY_ACTIVE' }, 409, env);
     }
 
     if (existing.status === 'revoked') {
-      return jsonResponse({ error: 'KEY_REVOKED' }, 403);
+      return jsonResponse({ error: 'KEY_REVOKED' }, 403, env);
     }
 
     await env.DB.prepare(
@@ -114,9 +114,9 @@ async function handleActivate(request, env) {
        WHERE key = ? AND status = 'unused'`
     ).bind(notionUserId || null, key).run();
 
-    return jsonResponse({ success: true, status: 'active' });
+    return jsonResponse({ success: true, status: 'active' }, 200, env);
   } catch {
-    return jsonResponse({ error: 'ACTIVATION_FAILED' }, 500);
+    return jsonResponse({ error: 'ACTIVATION_FAILED' }, 500, env);
   }
 }
 

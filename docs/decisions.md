@@ -63,3 +63,43 @@
 **Decision:** Background service worker acts as central message router. All state reads/writes go through it via `chrome.runtime.sendMessage()`. This ensures consistency and allows the service worker to coordinate API calls.
 
 **Trade-off:** Adds message-passing overhead. But it prevents race conditions on chrome.storage and centralizes error handling.
+
+## Sprint 1 Step 2 — Integration Decisions
+
+### Decision 9: Server-Side Notion Token Storage
+
+**Context:** Notion OAuth tokens should never be sent to the client extension. The Worker stores tokens in D1 and makes API calls on behalf of the user.
+
+**Decision:** `notion_connections` table stores access_token, workspace_id, and template_db_id. The extension only knows "connected: true/false" via the `/notion/status` endpoint.
+
+**Rationale:** Prevents token theft if extension is compromised. Simplifies extension code — no token management needed.
+
+### Decision 10: OAuth CSRF Prevention via D1 State Tokens
+
+**Context:** The Notion OAuth callback is browser-navigated (no extension auth headers). Need to link the callback to the correct license key.
+
+**Decision:** Generate random UUID state token, store `(state, license_key)` mapping in `oauth_states` table, pass state in OAuth URL. On callback, look up license key from state and delete the token. Auto-clean expired states (>10 min).
+
+### Decision 11: Rate Limiter Owns analysis_count, Token Tracker Only Updates Tokens
+
+**Context:** Initial implementation double-counted analysis_count (once in rate limiter, once in trackUsage). This halved the effective daily limit.
+
+**Decision:** The rate limiter atomically increments `analysis_count` via `INSERT...ON CONFLICT DO UPDATE WHERE analysis_count < ?`. The `trackTokenUsage` function only updates `token_input` and `token_output` fields (inserts with `analysis_count=0`).
+
+**Rationale:** Single source of truth for usage counting prevents double-counting bugs.
+
+### Decision 12: Auth Middleware Fails Closed on DB Error
+
+**Context:** Auth middleware must decide what to do when D1 is unreachable. Failing open would allow unauthenticated access during outages.
+
+**Decision:** Return `AUTH_SERVICE_UNAVAILABLE` error when DB check fails. This means D1 outages block all API access.
+
+**Trade-off:** Availability sacrifice for security. Acceptable because D1 outages are rare and the alternative (open access) could incur unbounded API costs.
+
+### Decision 13: Parsed Trades Stored in chrome.storage for Analysis Tab
+
+**Context:** The Analysis tab needs trade data to send to the `/claude/analyze` endpoint. Options: re-fetch from Notion, or store locally after parsing.
+
+**Decision:** Store the most recent parsed/synced trades in `chrome.storage.local` under `recentTrades`. The Analysis tab reads from this storage automatically.
+
+**Trade-off:** Trades may become stale if user trades outside the extension. Acceptable for v1 — analysis is always on "current session" trades.

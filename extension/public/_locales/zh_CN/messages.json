@@ -196,7 +196,153 @@
     "description": "Risk assessment template"
   },
   "analysisNoTrades": {
-    "message": "请先同步交易记录后再进行分析",
+    "message": "请先在智能粘贴中解析交易记录",
     "description": "No trades for analysis"
+  },
+  "analysisRunButton": {
+    "message": "开始分析",
+    "description": "Run analysis button"
+  },
+  "analysisLoading": {
+    "message": "AI 分析中...",
+    "description": "Analysis loading text"
+  },
+  "analysisComplete": {
+    "message": "分析完成",
+    "description": "Analysis complete title"
+  },
+  "analysisScore": {
+    "message": "综合评分",
+    "description": "Analysis score label"
+  },
+  "analysisSaveToNotion": {
+    "message": "保存到 Notion",
+    "description": "Save analysis to Notion button"
+  },
+  "analysisSaved": {
+    "message": "已保存到 Notion",
+    "description": "Analysis saved confirmation"
+  },
+  "analysisSaveFailed": {
+    "message": "保存失败，请重试",
+    "description": "Analysis save failed"
+  },
+  "analysisError": {
+    "message": "分析失败，请稍后重试",
+    "description": "Analysis error message"
+  },
+  "analysisTradeCount": {
+    "message": "共 $count$ 笔交易",
+    "description": "Trade count for analysis",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "analysisInsights": {
+    "message": "分析洞察",
+    "description": "Insights section title"
+  },
+  "analysisActionItems": {
+    "message": "行动建议",
+    "description": "Action items section title"
+  },
+  "analysisMetrics": {
+    "message": "关键指标",
+    "description": "Metrics section title"
+  },
+  "analysisWinRate": {
+    "message": "胜率",
+    "description": "Win rate metric"
+  },
+  "analysisProfitFactor": {
+    "message": "盈亏比",
+    "description": "Profit factor metric"
+  },
+  "analysisTotalPnl": {
+    "message": "总盈亏",
+    "description": "Total P/L metric"
+  },
+  "settingsSetupDatabase": {
+    "message": "创建 Notion 数据库",
+    "description": "Set up Notion database button"
+  },
+  "settingsDatabaseReady": {
+    "message": "Notion 数据库已就绪",
+    "description": "Database configured status"
+  },
+  "settingsCheckingStatus": {
+    "message": "检查连接状态...",
+    "description": "Checking Notion status"
+  },
+  "settingsSetupComplete": {
+    "message": "数据库创建成功！",
+    "description": "Database setup success"
+  },
+  "settingsSetupFailed": {
+    "message": "数据库创建失败，请重试",
+    "description": "Database setup failed"
+  },
+  "settingsSetupLoading": {
+    "message": "创建中...",
+    "description": "Database setup loading"
+  },
+  "settingsWorkspace": {
+    "message": "工作区",
+    "description": "Workspace label"
+  },
+  "settingsLicenseRequired": {
+    "message": "请先激活许可证",
+    "description": "License required message"
+  },
+  "insightCritical": {
+    "message": "严重",
+    "description": "Critical severity label"
+  },
+  "insightWarning": {
+    "message": "警告",
+    "description": "Warning severity label"
+  },
+  "insightInfo": {
+    "message": "提示",
+    "description": "Info severity label"
+  },
+  "historyViewInNotion": {
+    "message": "在 Notion 中查看",
+    "description": "View in Notion link"
+  },
+  "historyPartialSync": {
+    "message": "部分成功",
+    "description": "Partial sync status"
+  },
+  "rateLimitDaily": {
+    "message": "今日免费分析已用完，明天重置",
+    "description": "Daily rate limit message"
+  },
+  "rateLimitMonthly": {
+    "message": "本月分析次数已用完",
+    "description": "Monthly rate limit message"
+  },
+  "syncResultSynced": {
+    "message": "成功同步 $count$ 笔",
+    "description": "Sync result count",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "syncResultErrors": {
+    "message": "$count$ 笔同步失败",
+    "description": "Sync error count",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "1"
+      }
+    }
   }
 }

@@ -122,19 +122,6 @@ export async function parseTrades(rawText, licenseKey) {
 }
 
 /**
- * Sync parsed trades to Notion.
- * @param {Array} trades - Array of parsed trade objects
- * @param {string} licenseKey - User's license key
- * @returns {Promise<Object>} Sync result
- */
-export async function syncToNotion(trades, licenseKey) {
-  return apiRequest('/notion/sync', {
-    body: { trades },
-    licenseKey,
-  });
-}
-
-/**
  * Validate a license key.
  * @param {string} licenseKey - 16-char activation code
  * @returns {Promise<Object>} Validation result
@@ -155,6 +142,86 @@ export async function validateLicense(licenseKey) {
 export async function activateLicense(licenseKey, notionUserId) {
   return apiRequest('/license/activate', {
     body: { key: licenseKey, notion_user_id: notionUserId },
+    licenseKey,
+  });
+}
+
+/**
+ * Get Notion connection status.
+ * @param {string} licenseKey
+ * @returns {Promise<Object>} { connected, workspace_name, database_configured, database_id }
+ */
+export async function getNotionStatus(licenseKey) {
+  return apiRequest('/notion/status', {
+    method: 'GET',
+    licenseKey,
+  });
+}
+
+/**
+ * Get Notion OAuth authorization URL.
+ * @param {string} licenseKey
+ * @returns {Promise<Object>} { url }
+ */
+export async function getNotionAuthUrl(licenseKey) {
+  return apiRequest('/notion/auth', {
+    method: 'GET',
+    licenseKey,
+  });
+}
+
+/**
+ * Set up the Notion Trading Journal database.
+ * @param {string} licenseKey
+ * @returns {Promise<Object>} { success, database_id, url }
+ */
+export async function setupNotionDatabase(licenseKey) {
+  return apiRequest('/notion/setup', {
+    body: {},
+    licenseKey,
+  });
+}
+
+/**
+ * Create trade entries in Notion.
+ * @param {Array} trades - Array of parsed trade objects
+ * @param {string} licenseKey
+ * @returns {Promise<Object>} { success, synced_count, error_count, results }
+ */
+export async function createNotionTrades(trades, licenseKey) {
+  return apiRequest('/notion/trades', {
+    body: { trades },
+    timeoutMs: 60000,
+    licenseKey,
+  });
+}
+
+/**
+ * Write AI analysis to a Notion trade page.
+ * @param {string} pageId - Notion page ID
+ * @param {Object} analysis - Analysis result object
+ * @param {string} licenseKey
+ * @returns {Promise<Object>}
+ */
+export async function writeNotionAnalysis(pageId, analysis, licenseKey) {
+  return apiRequest('/notion/analysis', {
+    body: { page_id: pageId, analysis },
+    licenseKey,
+  });
+}
+
+/**
+ * Analyze trades via AI with a preset template.
+ * @param {Array} trades - Array of trade objects
+ * @param {string} analysisType - One of: daily_review, single_trade, weekly_stats, etc.
+ * @param {string} language - 'zh' or 'en'
+ * @param {string} licenseKey
+ * @returns {Promise<Object>} { analysis }
+ */
+export async function analyzeTrades(trades, analysisType, language, licenseKey) {
+  return apiRequest('/claude/analyze', {
+    body: { trades, analysis_type: analysisType, language },
+    timeoutMs: 45000,
     licenseKey,
   });
 }

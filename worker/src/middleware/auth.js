@@ -48,7 +48,7 @@ export async function verifyRequest(request, env) {
         return { valid: false, reason: 'LICENSE_REVOKED' };
       }
     } catch {
-      // DB check failure — allow request as fallback
+      return { valid: false, reason: 'AUTH_SERVICE_UNAVAILABLE' };
     }
   }
 

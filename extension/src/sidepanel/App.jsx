@@ -18,8 +18,10 @@ export function App() {
   const [state, setState] = useState({
     notionConnected: false,
     licenseActive: false,
+    notionDbConfigured: false,
     settings: { language: 'zh_CN', theme: 'dark' },
     recentSyncs: [],
+    recentTrades: [],
   });
   const [loading, setLoading] = useState(true);
 
@@ -43,15 +45,32 @@ export function App() {
   function renderActiveTab() {
     switch (activeTab) {
       case 'smartpaste':
-        return <SmartPaste notionConnected={state.notionConnected} onSyncComplete={loadState} />;
+        return (
+          <SmartPaste
+            notionConnected={state.notionConnected}
+            notionDbConfigured={state.notionDbConfigured}
+            onSyncComplete={loadState}
+          />
+        );
       case 'history':
         return <History syncs={state.recentSyncs} />;
       case 'analysis':
-        return <Analysis notionConnected={state.notionConnected} />;
+        return (
+          <Analysis
+            notionConnected={state.notionConnected}
+            recentTrades={state.recentTrades}
+          />
+        );
       case 'settings':
         return <Settings state={state} onStateChange={loadState} />;
       default:
-        return <SmartPaste notionConnected={state.notionConnected} onSyncComplete={loadState} />;
+        return (
+          <SmartPaste
+            notionConnected={state.notionConnected}
+            notionDbConfigured={state.notionDbConfigured}
+            onSyncComplete={loadState}
+          />
+        );
     }
   }
 

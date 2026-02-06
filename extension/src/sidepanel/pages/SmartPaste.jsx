@@ -7,15 +7,16 @@ import { LoadingSpinner } from '../components/LoadingSpinner.jsx';
  * Smart Paste page — paste CSV/text, parse, preview, sync to Notion.
  * @param {Object} props
  * @param {boolean} props.notionConnected
+ * @param {boolean} props.notionDbConfigured
  * @param {function} props.onSyncComplete
  */
-export function SmartPaste({ notionConnected, onSyncComplete }) {
+export function SmartPaste({ notionConnected, notionDbConfigured, onSyncComplete }) {
   const [rawInput, setRawInput] = useState('');
   const [parsedTrades, setParsedTrades] = useState(null);
   const [parseLoading, setParsing] = useState(false);
   const [syncLoading, setSyncing] = useState(false);
   const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [syncResult, setSyncResult] = useState(null);
 
   async function handleParse() {
     if (!rawInput.trim()) {
@@ -23,7 +24,7 @@ export function SmartPaste({ notionConnected, onSyncComplete }) {
     }
 
     setError('');
-    setSuccessMessage('');
+    setSyncResult(null);
     setParsedTrades(null);
     setParsing(true);
 
@@ -36,7 +37,9 @@ export function SmartPaste({ notionConnected, onSyncComplete }) {
       if (response.error) {
         setError(response.error === 'NOT_TRADE_DATA'
           ? t('noTradesFound')
-          : t('parseError'));
+          : response.error === 'RATE_LIMITED'
+            ? t('rateLimitDaily')
+            : t('parseError'));
         return;
       }
 
@@ -59,7 +62,7 @@ export function SmartPaste({ notionConnected, onSyncComplete }) {
     }
 
     setError('');
-    setSuccessMessage('');
+    setSyncResult(null);
     setSyncing(true);
 
     try {
@@ -69,11 +72,13 @@ export function SmartPaste({ notionConnected, onSyncComplete }) {
       });
 
       if (response.error) {
-        setError(t('syncError'));
+        setError(response.error === 'NOTION_NOT_CONNECTED'
+          ? t('connectNotionFirst')
+          : t('syncError'));
         return;
       }
 
-      setSuccessMessage(t('syncSuccess', [String(parsedTrades.length)]));
+      setSyncResult(response);
       setParsedTrades(null);
       setRawInput('');
       if (onSyncComplete) {
@@ -85,6 +90,8 @@ export function SmartPaste({ notionConnected, onSyncComplete }) {
       setSyncing(false);
     }
   }
+
+  const canSync = notionConnected && notionDbConfigured;
 
   return (
     <div class="flex flex-col gap-4">
@@ -113,9 +120,25 @@ export function SmartPaste({ notionConnected, onSyncComplete }) {
         </div>
       )}
 
-      {successMessage && (
-        <div class="card border-profit/30 bg-profit/10 text-profit text-sm">
-          {successMessage}
+      {syncResult && (
+        <div class="card border-profit/30 bg-profit/10 text-sm flex flex-col gap-2">
+          <p class="text-profit font-medium">
+            {t('syncResultSynced', [String(syncResult.synced_count || 0)])}
+          </p>
+          {syncResult.error_count > 0 && (
+            <p class="text-loss text-xs">
+              {t('syncResultErrors', [String(syncResult.error_count)])}
+            </p>
+          )}
+          {syncResult.results && syncResult.results.length > 0 && (
+            <div class="flex flex-wrap gap-1 mt-1">
+              {syncResult.results.slice(0, 5).map((r, i) => (
+                <span key={i} class="text-xs text-text-muted bg-surface-raised px-2 py-0.5 rounded">
+                  {r.symbol}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
@@ -126,11 +149,11 @@ export function SmartPaste({ notionConnected, onSyncComplete }) {
             type="button"
             class="btn-primary w-full"
             onClick={handleSync}
-            disabled={!notionConnected || syncLoading}
+            disabled={!canSync || syncLoading}
           >
             {syncLoading
               ? t('syncing')
-              : notionConnected
+              : canSync
                 ? t('confirmSync')
                 : t('connectNotionFirst')}
           </button>

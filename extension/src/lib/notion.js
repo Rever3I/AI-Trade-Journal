@@ -4,7 +4,7 @@
  * This module handles data formatting and validation before sync.
  */
 
-import { apiRequest } from './api.js';
+import { getNotionAuthUrl } from './api.js';
 
 /**
  * Required fields for a valid trade entry.
@@ -113,10 +113,11 @@ export function formatTradeForNotion(trade) {
 /**
  * Initiate Notion OAuth flow via the Worker proxy.
  * Opens the OAuth authorization URL in a new tab.
+ * @param {string} licenseKey - User's license key for auth
  * @returns {Promise<void>}
  */
-export async function initiateNotionOAuth() {
-  const response = await apiRequest('/notion/auth-url', { method: 'GET' });
+export async function initiateNotionOAuth(licenseKey) {
+  const response = await getNotionAuthUrl(licenseKey);
   if (response.url) {
     chrome.tabs.create({ url: response.url });
   }

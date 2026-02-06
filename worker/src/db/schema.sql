@@ -1,5 +1,5 @@
 -- AI Trade Journal — D1 Database Schema
--- Version: 1.0.0
+-- Version: 2.0.0
 
 -- License keys table
 CREATE TABLE IF NOT EXISTS licenses (
@@ -23,3 +23,22 @@ CREATE TABLE IF NOT EXISTS usage (
 
 -- Index for fast usage lookups
 CREATE INDEX IF NOT EXISTS idx_usage_license_date ON usage(license_key, date);
+
+-- Notion OAuth connections (server-side token storage)
+CREATE TABLE IF NOT EXISTS notion_connections (
+  license_key TEXT PRIMARY KEY REFERENCES licenses(key),
+  access_token TEXT NOT NULL,
+  workspace_id TEXT,
+  workspace_name TEXT,
+  bot_id TEXT,
+  template_db_id TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- OAuth state tokens for CSRF prevention
+CREATE TABLE IF NOT EXISTS oauth_states (
+  state TEXT PRIMARY KEY,
+  license_key TEXT NOT NULL REFERENCES licenses(key),
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
