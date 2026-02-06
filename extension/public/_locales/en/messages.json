@@ -1,0 +1,202 @@
+{
+  "extName": {
+    "message": "AI Trade Journal",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "One-click capture trades from your broker, AI auto-generates professional trade reviews in Notion",
+    "description": "Extension description"
+  },
+  "tabSmartPaste": {
+    "message": "Smart Paste",
+    "description": "Smart Paste tab label"
+  },
+  "tabHistory": {
+    "message": "History",
+    "description": "History tab label"
+  },
+  "tabAnalysis": {
+    "message": "Analysis",
+    "description": "Analysis tab label"
+  },
+  "tabSettings": {
+    "message": "Settings",
+    "description": "Settings tab label"
+  },
+  "smartPastePlaceholder": {
+    "message": "Paste your trade records (CSV or text)...",
+    "description": "Smart Paste textarea placeholder"
+  },
+  "parseButton": {
+    "message": "Parse",
+    "description": "Parse button text"
+  },
+  "parsing": {
+    "message": "Parsing...",
+    "description": "Parsing loading text"
+  },
+  "syncing": {
+    "message": "Syncing...",
+    "description": "Syncing loading text"
+  },
+  "confirmSync": {
+    "message": "Confirm Sync to Notion",
+    "description": "Confirm sync button text"
+  },
+  "connectNotionFirst": {
+    "message": "Please connect Notion first",
+    "description": "Message when Notion not connected"
+  },
+  "colSymbol": {
+    "message": "Symbol",
+    "description": "Column header: Symbol"
+  },
+  "colAction": {
+    "message": "Action",
+    "description": "Column header: Action"
+  },
+  "colQuantity": {
+    "message": "Qty",
+    "description": "Column header: Quantity"
+  },
+  "colPrice": {
+    "message": "Price",
+    "description": "Column header: Price"
+  },
+  "colDatetime": {
+    "message": "Time",
+    "description": "Column header: DateTime"
+  },
+  "colBroker": {
+    "message": "Broker",
+    "description": "Column header: Broker"
+  },
+  "noTradesFound": {
+    "message": "No trades found. Please check the input format.",
+    "description": "No trades found error"
+  },
+  "parseError": {
+    "message": "Parse failed. Please try again later.",
+    "description": "Parse error message"
+  },
+  "networkError": {
+    "message": "Network connection failed. Please check your connection.",
+    "description": "Network error message"
+  },
+  "syncSuccess": {
+    "message": "Sync successful! Added $count$ trades to Notion.",
+    "description": "Sync success message",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "syncError": {
+    "message": "Sync failed. Please try again later.",
+    "description": "Sync error message"
+  },
+  "popupStatus": {
+    "message": "Connection Status",
+    "description": "Popup status label"
+  },
+  "popupNotionConnected": {
+    "message": "Notion Connected",
+    "description": "Notion connected status"
+  },
+  "popupNotionDisconnected": {
+    "message": "Notion Not Connected",
+    "description": "Notion disconnected status"
+  },
+  "popupLicenseActive": {
+    "message": "License Active",
+    "description": "License active status"
+  },
+  "popupLicenseInactive": {
+    "message": "License Not Activated",
+    "description": "License inactive status"
+  },
+  "popupQuickSync": {
+    "message": "Quick Sync",
+    "description": "Quick sync button"
+  },
+  "popupOpenPanel": {
+    "message": "Open Side Panel",
+    "description": "Open side panel button"
+  },
+  "settingsNotionConnection": {
+    "message": "Notion Connection",
+    "description": "Settings: Notion connection section"
+  },
+  "settingsLicenseKey": {
+    "message": "License Key",
+    "description": "Settings: License key section"
+  },
+  "settingsLanguage": {
+    "message": "Language",
+    "description": "Settings: Language section"
+  },
+  "settingsConnectNotion": {
+    "message": "Connect Notion",
+    "description": "Connect Notion button"
+  },
+  "settingsDisconnect": {
+    "message": "Disconnect",
+    "description": "Disconnect button"
+  },
+  "settingsActivate": {
+    "message": "Activate",
+    "description": "Activate license button"
+  },
+  "settingsLicensePlaceholder": {
+    "message": "Enter 16-digit activation code",
+    "description": "License key input placeholder"
+  },
+  "historyEmpty": {
+    "message": "No sync history yet",
+    "description": "Empty history message"
+  },
+  "historyTradeCount": {
+    "message": "$count$ trades",
+    "description": "Trade count in history",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "analysisSelectTemplate": {
+    "message": "Select Analysis Template",
+    "description": "Analysis: select template"
+  },
+  "analysisDailyReview": {
+    "message": "Daily Review",
+    "description": "Daily review template"
+  },
+  "analysisSingleTrade": {
+    "message": "Single Trade Deep-Dive",
+    "description": "Single trade deep-dive template"
+  },
+  "analysisWeeklyStats": {
+    "message": "Weekly Stats",
+    "description": "Weekly stats template"
+  },
+  "analysisStrategyEval": {
+    "message": "Strategy Evaluation",
+    "description": "Strategy evaluation template"
+  },
+  "analysisEmotionCheck": {
+    "message": "Emotion Check",
+    "description": "Emotion check template"
+  },
+  "analysisRiskAssessment": {
+    "message": "Risk Assessment",
+    "description": "Risk assessment template"
+  },
+  "analysisNoTrades": {
+    "message": "Please sync trade records before running analysis",
+    "description": "No trades for analysis"
+  }
+}

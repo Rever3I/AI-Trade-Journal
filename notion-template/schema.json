@@ -1,0 +1,86 @@
+{
+  "database_name": "AI Trading Journal",
+  "version": "1.0.0",
+  "properties": {
+    "Symbol": {
+      "type": "title",
+      "description": "Ticker symbol"
+    },
+    "Trade Date": {
+      "type": "date",
+      "description": "Trade execution datetime"
+    },
+    "Action": {
+      "type": "select",
+      "options": ["Buy", "Sell", "Short", "Cover"]
+    },
+    "Quantity": {
+      "type": "number",
+      "format": "number",
+      "description": "Shares/contracts"
+    },
+    "Entry Price": {
+      "type": "number",
+      "format": "dollar",
+      "description": "Entry price"
+    },
+    "Exit Price": {
+      "type": "number",
+      "format": "dollar",
+      "description": "Exit price (if closed)"
+    },
+    "P/L": {
+      "type": "formula",
+      "expression": "if(prop(\"Exit Price\") > 0, (prop(\"Exit Price\") - prop(\"Entry Price\")) * prop(\"Quantity\"), 0)",
+      "description": "Calculated profit/loss"
+    },
+    "P/L %": {
+      "type": "formula",
+      "expression": "if(prop(\"Entry Price\") > 0 and prop(\"Exit Price\") > 0, round((prop(\"Exit Price\") - prop(\"Entry Price\")) / prop(\"Entry Price\") * 100 * 100) / 100, 0)",
+      "description": "Percentage return"
+    },
+    "R-Multiple": {
+      "type": "number",
+      "format": "number",
+      "description": "Risk-reward ratio"
+    },
+    "Commission": {
+      "type": "number",
+      "format": "dollar",
+      "description": "Trading fees"
+    },
+    "Setup Type": {
+      "type": "select",
+      "options": ["Breakout", "Pullback", "Range", "Momentum", "Other"]
+    },
+    "Emotion Tag": {
+      "type": "multi_select",
+      "options": ["Disciplined", "FOMO", "Revenge", "Overconfident", "Fear"]
+    },
+    "AI Analysis": {
+      "type": "rich_text",
+      "description": "AI-generated trade review"
+    },
+    "AI Score": {
+      "type": "number",
+      "format": "number",
+      "description": "0-100 quality score from AI"
+    },
+    "Notes": {
+      "type": "rich_text",
+      "description": "User's own notes"
+    },
+    "Screenshot": {
+      "type": "files",
+      "description": "Chart screenshots"
+    },
+    "Broker": {
+      "type": "select",
+      "options": ["Futu", "IBKR", "Webull", "Schwab", "Tiger", "Longbridge", "Other"]
+    },
+    "Sync Status": {
+      "type": "select",
+      "options": ["Synced", "Pending", "Error"]
+    }
+  }
+}

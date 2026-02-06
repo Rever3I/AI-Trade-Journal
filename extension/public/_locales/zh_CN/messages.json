@@ -1,0 +1,202 @@
+{
+  "extName": {
+    "message": "AI 交易日志",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "一键捕获券商交易记录，AI自动生成专业复盘分析到Notion",
+    "description": "Extension description"
+  },
+  "tabSmartPaste": {
+    "message": "智能粘贴",
+    "description": "Smart Paste tab label"
+  },
+  "tabHistory": {
+    "message": "历史记录",
+    "description": "History tab label"
+  },
+  "tabAnalysis": {
+    "message": "AI分析",
+    "description": "Analysis tab label"
+  },
+  "tabSettings": {
+    "message": "设置",
+    "description": "Settings tab label"
+  },
+  "smartPastePlaceholder": {
+    "message": "粘贴你的交易记录（CSV或文本）...",
+    "description": "Smart Paste textarea placeholder"
+  },
+  "parseButton": {
+    "message": "解析",
+    "description": "Parse button text"
+  },
+  "parsing": {
+    "message": "解析中...",
+    "description": "Parsing loading text"
+  },
+  "syncing": {
+    "message": "同步中...",
+    "description": "Syncing loading text"
+  },
+  "confirmSync": {
+    "message": "确认同步到Notion",
+    "description": "Confirm sync button text"
+  },
+  "connectNotionFirst": {
+    "message": "请先连接 Notion",
+    "description": "Message when Notion not connected"
+  },
+  "colSymbol": {
+    "message": "代码",
+    "description": "Column header: Symbol"
+  },
+  "colAction": {
+    "message": "操作",
+    "description": "Column header: Action"
+  },
+  "colQuantity": {
+    "message": "数量",
+    "description": "Column header: Quantity"
+  },
+  "colPrice": {
+    "message": "价格",
+    "description": "Column header: Price"
+  },
+  "colDatetime": {
+    "message": "时间",
+    "description": "Column header: DateTime"
+  },
+  "colBroker": {
+    "message": "券商",
+    "description": "Column header: Broker"
+  },
+  "noTradesFound": {
+    "message": "未识别到交易记录，请检查输入格式",
+    "description": "No trades found error"
+  },
+  "parseError": {
+    "message": "解析失败，请稍后重试",
+    "description": "Parse error message"
+  },
+  "networkError": {
+    "message": "网络连接失败，请检查网络后重试",
+    "description": "Network error message"
+  },
+  "syncSuccess": {
+    "message": "同步成功！已添加 $count$ 笔交易到 Notion",
+    "description": "Sync success message",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "syncError": {
+    "message": "同步失败，请稍后重试",
+    "description": "Sync error message"
+  },
+  "popupStatus": {
+    "message": "连接状态",
+    "description": "Popup status label"
+  },
+  "popupNotionConnected": {
+    "message": "Notion 已连接",
+    "description": "Notion connected status"
+  },
+  "popupNotionDisconnected": {
+    "message": "Notion 未连接",
+    "description": "Notion disconnected status"
+  },
+  "popupLicenseActive": {
+    "message": "许可证已激活",
+    "description": "License active status"
+  },
+  "popupLicenseInactive": {
+    "message": "许可证未激活",
+    "description": "License inactive status"
+  },
+  "popupQuickSync": {
+    "message": "快速同步",
+    "description": "Quick sync button"
+  },
+  "popupOpenPanel": {
+    "message": "打开侧边栏",
+    "description": "Open side panel button"
+  },
+  "settingsNotionConnection": {
+    "message": "Notion 连接",
+    "description": "Settings: Notion connection section"
+  },
+  "settingsLicenseKey": {
+    "message": "许可证密钥",
+    "description": "Settings: License key section"
+  },
+  "settingsLanguage": {
+    "message": "语言",
+    "description": "Settings: Language section"
+  },
+  "settingsConnectNotion": {
+    "message": "连接 Notion",
+    "description": "Connect Notion button"
+  },
+  "settingsDisconnect": {
+    "message": "断开连接",
+    "description": "Disconnect button"
+  },
+  "settingsActivate": {
+    "message": "激活",
+    "description": "Activate license button"
+  },
+  "settingsLicensePlaceholder": {
+    "message": "输入16位激活码",
+    "description": "License key input placeholder"
+  },
+  "historyEmpty": {
+    "message": "暂无同步记录",
+    "description": "Empty history message"
+  },
+  "historyTradeCount": {
+    "message": "$count$ 笔交易",
+    "description": "Trade count in history",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "analysisSelectTemplate": {
+    "message": "选择分析模板",
+    "description": "Analysis: select template"
+  },
+  "analysisDailyReview": {
+    "message": "日内复盘",
+    "description": "Daily review template"
+  },
+  "analysisSingleTrade": {
+    "message": "单笔深挖",
+    "description": "Single trade deep-dive template"
+  },
+  "analysisWeeklyStats": {
+    "message": "周度统计",
+    "description": "Weekly stats template"
+  },
+  "analysisStrategyEval": {
+    "message": "策略评估",
+    "description": "Strategy evaluation template"
+  },
+  "analysisEmotionCheck": {
+    "message": "情绪体检",
+    "description": "Emotion check template"
+  },
+  "analysisRiskAssessment": {
+    "message": "风险体检",
+    "description": "Risk assessment template"
+  },
+  "analysisNoTrades": {
+    "message": "请先同步交易记录后再进行分析",
+    "description": "No trades for analysis"
+  }
+}
